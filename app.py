@@ -77,10 +77,10 @@ def index():
 
 @app.route('/graph')
 def graph():
-    #resp = make_response(render_template(app.graph_file))
-    #resp.cache_control.no_cache = True
-    #return resp
-    return render_template(app.graph_file)
+    resp = make_response(render_template(app.graph_file))
+    resp.cache_control.no_cache = True
+    return resp
+    #return render_template(app.graph_file)
 
 if __name__ == '__main__':
   app.run(port=33507, debug=True)
