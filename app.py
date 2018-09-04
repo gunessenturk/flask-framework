@@ -23,7 +23,7 @@ def index():
     if request.method == 'GET':
         #if os.path.exists('templates/stock_pr_.*'):
         #   os.remove('templates/stock_pr_.*')
-        #purge('templates','stock_pr_.*')
+        purge('templates','stock_pr_.*')
         return render_template('index.html')
     else:
         
@@ -60,7 +60,7 @@ def index():
 
         #if os.path.exists('templates/stock_pr_.*'):
         #    os.remove('templates/stock_pr_.*')
-        purge('templates','stock_pr_.*')
+        #purge('templates','stock_pr_.*')
 
         app.graph_file='stock_pr_'+ds_code+start_date+end_date+'.html'
         #output_file('templates/stocks.html', title='Stock Prices')
