@@ -49,9 +49,10 @@ def index():
 
         p1.patches('date', 'price', source=data)
 
-        # open a browser
+
         if os.path.exists("templates/stocks.html"):
             os.remove("templates/stocks.html")
+        
         output_file("templates/stocks.html", title="Stock Prices")
         show(gridplot([[p1]], plot_width=400, plot_height=400))
 
@@ -61,6 +62,8 @@ def index():
         del r
         del f
         del df
+        del url
+        del p1
 
         return redirect('/graph')
 
