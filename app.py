@@ -33,7 +33,22 @@ def index():
         file.write('%s\n\n' % (df['date']))
         file.close()
 
+        data=dict( date=df['date'].tolist(), price=df['closing'])
 
+        p1 = figure(x_axis_type="datetime", title="Stock Closing Prices")
+        p1.grid.grid_line_alpha=0.3
+        p1.xaxis.axis_label = 'Date'
+        p1.yaxis.axis_label = 'Price'
+
+        p1.line(df['date'], df['closing'], color='#A6CEE3', legend=ds_code)
+
+        p1.legend.location = "top_left"
+
+        p1.patches('date', 'price', source=data)
+
+        # open a browser
+        output_file("templates/stocks.html", title="Stock Prices")
+        show(gridplot([[p1]], plot_width=400, plot_height=400))
 
         return redirect('/graph')
 
