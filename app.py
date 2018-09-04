@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, make_response
 import requests
 import pandas as pd
 import numpy as np
@@ -11,17 +11,19 @@ from bokeh.models import ColumnDataSource, LabelSet
 
 app = Flask(__name__)
 
+app.graph_file = ''
+
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        if os.path.exists("templates/stocks.html"):
-            os.remove("templates/stocks.html")
+        if os.path.exists('templates/stocks.html'):
+            os.remove('templates/stocks.html')
         return render_template('index.html')
     else:
         
         
-        db_code = "EOD"
-        # ds_code = "HD"
+        db_code = 'EOD'
+        # ds_code = 'HD'
         ds_code = request.form['company']
         start_date = request.form['start_date']
         end_date = request.form['end_date']
@@ -38,22 +40,22 @@ def index():
 
         data=dict( date=df['date'].tolist(), price=df['closing'])
 
-        p1 = figure(x_axis_type="datetime", title="Closing Stock Prices")
+        p1 = figure(x_axis_type='datetime', title='Closing Stock Prices')
         p1.grid.grid_line_alpha=0.3
         p1.xaxis.axis_label = 'Date'
         p1.yaxis.axis_label = 'Price'
 
         p1.line(df['date'], df['closing'], color='#A6CEE3', legend=ds_code)
 
-        p1.legend.location = "top_left"
+        p1.legend.location = 'top_left'
 
         p1.patches('date', 'price', source=data)
 
 
-        if os.path.exists("templates/stocks.html"):
-            os.remove("templates/stocks.html")
+        if os.path.exists('templates/stocks.html'):
+            os.remove('templates/stocks.html')
         
-        output_file("templates/stocks.html", title="Stock Prices")
+        output_file('templates/stocks.html', title='Stock Prices')
         show(gridplot([[p1]], plot_width=400, plot_height=400))
 
         del ds_code
@@ -69,7 +71,10 @@ def index():
 
 @app.route('/graph')
 def graph():
-    return render_template('stocks.html')
+    resp = make_response(render_template('stocks.html'))
+    resp.cache_control.no_cache = True
+    return resp
+    #return render_template('stocks.html')
 
 if __name__ == '__main__':
   app.run(port=33507, debug=True)
