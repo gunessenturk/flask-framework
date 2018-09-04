@@ -22,9 +22,12 @@ def purge(dir, pattern):
 def index():
     if request.method == 'GET':
         #if os.path.exists('templates/stock_pr_.*'):
-        #   os.remove('templates/stock_pr_.*')
+        #  os.remove('templates/stock_pr_.*')
         #purge('templates','stock_pr_.*')
-        return render_template('index.html')
+        resp = make_response(render_template('index.html'))
+        resp.cache_control.no_cache = True
+        return resp
+        #return render_template('index.html')
     else:
         
         
@@ -67,23 +70,17 @@ def index():
         output_file('templates/'+app.graph_file, title='Stock Prices')
         show(gridplot([[p1]], plot_width=400, plot_height=400))
 
-        del ds_code
-        del start_date
-        del end_date
-        del r
-        del f
-        del df
-        del url
-        del p1
-
-        return redirect('/graph')
+        resp = make_response(redirect('/graph'))
+        resp.cache_control.no_cache = True
+        return resp
+        #return redirect('/graph')
 
 @app.route('/graph')
 def graph():
-    #resp = make_response(render_template('stocks.html'))
-    #resp.cache_control.no_cache = True
-    #return resp
-    return render_template(app.graph_file)
+    resp = make_response(render_template(app.graph_file))
+    resp.cache_control.no_cache = True
+    return resp
+    #return render_template(app.graph_file)
 
 if __name__ == '__main__':
   app.run(port=33507, debug=True)
