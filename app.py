@@ -3,6 +3,10 @@ import requests
 import pandas as pd
 import numpy as np
 
+from bokeh.layouts import gridplot
+from bokeh.plotting import figure, show, output_file
+from bokeh.models import ColumnDataSource, LabelSet
+
 app = Flask(__name__)
 
 @app.route('/index', methods=['GET', 'POST'])
@@ -20,9 +24,16 @@ def index():
         df = pd.DataFrame.from_dict(f)
         dataset = df.loc['data']
 
+        date = np.array(dataset[0])[:, 0]
+        closing_price = np.array(dataset[0])[:, 1]
+        df = pd.DataFrame({'date':date, 'closing':closing_price})
+        df['date'] = pd.to_datetime(df['date'])
+
         file = open('output.txt', 'w')
-        file.write('%s\n\n' % (f))
+        file.write('%s\n\n' % (df['date']))
         file.close()
+
+
 
         return redirect('/graph')
 

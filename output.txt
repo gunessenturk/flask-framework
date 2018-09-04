@@ -1,2 +1,10 @@
-{'dataset': {'id': 42635437, 'dataset_code': 'HD', 'database_code': 'EOD', 'name': 'Home Depot Inc. (The) (HD) Stock Prices, Dividends and Splits', 'description': "<p><b>Ticker</b>: HD</p>\n<p><b>Exchange</b>: NYSE</p>\n<p>Prices, dividends, splits for Home Depot Inc. (The) (HD).\n\n<p>Columns:</p>\n<p>Open, High, Low, Close, Volume are <b>unadjusted</b>.</p>\n<p>Dividend shows the <b>unadjusted</b> dividend on any ex-dividend date else 0.0.</p>\n<p>Split shows any split that occurred on a the given DATE else 1.0</p>\n<p>Adjusted values are adjusted for dividends and splits using the <a href='http://www.crsp.com/products/documentation/crsp-calculations'>CRSP methodology</a>.</p>\n<p>Updates of this dataset occur at 5pm ET.  Subsequent corrections from the exchange are applied at 9pm ET.</p>\n<p>Data is sourced from NASDAQ, NYSE and AMEX via <a href='http://www.quotemedia.com'>Quotemedia</a>.</p>\n\n", 'refreshed_at': '2018-09-01T00:57:42.871Z', 'newest_available_date': '2018-08-31', 'oldest_available_date': '1981-09-22', 'column_names': ['Date', 'Close'], 'frequency': 'daily', 'type': 'Time Series', 'premium': True, 'limit': None, 'transform': None, 'column_index': 4, 'start_date': '2018-08-20', 'end_date': '2018-08-29', 'data': [['2018-08-29', 201.68], ['2018-08-28', 201.97], ['2018-08-27', 201.98], ['2018-08-24', 201.3], ['2018-08-23', 200.16], ['2018-08-22', 198.97], ['2018-08-21', 200.23], ['2018-08-20', 197.93]], 'collapse': None, 'order': None, 'database_id': 12910}}
+0   2018-08-29
+1   2018-08-28
+2   2018-08-27
+3   2018-08-24
+4   2018-08-23
+5   2018-08-22
+6   2018-08-21
+7   2018-08-20
+Name: date, dtype: datetime64[ns]
 
