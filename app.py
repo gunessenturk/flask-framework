@@ -3,7 +3,7 @@ import requests
 import pandas as pd
 import numpy as np
 
-import os
+import os, re
 
 from bokeh.layouts import gridplot
 from bokeh.plotting import figure, show, output_file
@@ -13,11 +13,17 @@ app = Flask(__name__)
 
 app.graph_file = ''
 
+def purge(dir, pattern):
+    for f in os.listdir(dir):
+        if re.search(pattern, f):
+            os.remove(os.path.join(dir, f))
+
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        if os.path.exists('templates/stocks.html'):
-            os.remove('templates/stocks.html')
+        #if os.path.exists('templates/stock_pr_.*'):
+        #   os.remove('templates/stock_pr_.*')
+        purge('templates','stock_pr_.*')
         return render_template('index.html')
     else:
         
@@ -52,10 +58,11 @@ def index():
         p1.patches('date', 'price', source=data)
 
 
-        if os.path.exists('templates/stocks.html'):
-            os.remove('templates/stocks.html')
+        #if os.path.exists('templates/stock_pr_.*'):
+        #    os.remove('templates/stock_pr_.*')
+        purge('templates','stock_pr_.*')
 
-        app.graph_file=ds_code+start_date+end_date+'.html'
+        app.graph_file='stock_pr_'+ds_code+start_date+end_date+'.html'
         #output_file('templates/stocks.html', title='Stock Prices')
         output_file('templates/'+app.graph_file, title='Stock Prices')
         show(gridplot([[p1]], plot_width=400, plot_height=400))
