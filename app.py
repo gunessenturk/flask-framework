@@ -65,9 +65,9 @@ def index():
         #    os.remove('templates/stock_pr_.*')
         #purge('templates','stock_pr_.*')
 
-        app.graph_file='stock_pr_'+ds_code+start_date+end_date+'.html'
-        #output_file('templates/stocks.html', title='Stock Prices')
-        output_file('templates/'+app.graph_file, title='Stock Prices')
+        #app.graph_file='stock_pr_'+ds_code+start_date+end_date+'.html'
+        output_file('templates/stocks.html', title='Stock Prices')
+        #output_file('templates/'+app.graph_file, title='Stock Prices')
         show(gridplot([[p1]], plot_width=400, plot_height=400))
 
         #resp = make_response(redirect('/graph'))
@@ -77,7 +77,7 @@ def index():
 
 @app.route('/graph')
 def graph():
-    resp = make_response(render_template(app.graph_file))
+    resp = make_response(render_template('stocks.html'))
     resp.cache_control.no_cache = True
     return resp
     #return render_template(app.graph_file)
