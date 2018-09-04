@@ -54,8 +54,10 @@ def index():
 
         if os.path.exists('templates/stocks.html'):
             os.remove('templates/stocks.html')
-        
-        output_file('templates/stocks.html', title='Stock Prices')
+
+        app.graph_file=ds_code+start_date+end_date+'.html'
+        #output_file('templates/stocks.html', title='Stock Prices')
+        output_file('templates/'+app.graph_file, title='Stock Prices')
         show(gridplot([[p1]], plot_width=400, plot_height=400))
 
         del ds_code
@@ -71,10 +73,10 @@ def index():
 
 @app.route('/graph')
 def graph():
-    resp = make_response(render_template('stocks.html'))
-    resp.cache_control.no_cache = True
-    return resp
-    #return render_template('stocks.html')
+    #resp = make_response(render_template('stocks.html'))
+    #resp.cache_control.no_cache = True
+    #return resp
+    return render_template(app.graph_file)
 
 if __name__ == '__main__':
   app.run(port=33507, debug=True)
