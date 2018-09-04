@@ -14,6 +14,8 @@ app = Flask(__name__)
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
+        if os.path.exists("templates/stocks.html"):
+            os.remove("templates/stocks.html")
         return render_template('index.html')
     else:
         
