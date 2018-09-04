@@ -15,7 +15,8 @@ def index():
         return render_template('index.html')
     else:
         db_code = "EOD"
-        ds_code = "HD"
+        # ds_code = "HD"
+        ds_code = request.form['company']
         start_date = request.form['start_date']
         end_date = request.form['end_date']
         url = 'https://www.quandl.com/api/v3/datasets/'+db_code+'/'+ds_code+'?column_index=4&start_date='+start_date+'&end_date='+end_date+'&api_key=D75Ftay9wEKd3jtrYJG8'
@@ -31,7 +32,7 @@ def index():
 
         data=dict( date=df['date'].tolist(), price=df['closing'])
 
-        p1 = figure(x_axis_type="datetime", title="Stock Closing Prices")
+        p1 = figure(x_axis_type="datetime", title="Closing Stock Prices")
         p1.grid.grid_line_alpha=0.3
         p1.xaxis.axis_label = 'Date'
         p1.yaxis.axis_label = 'Price'
