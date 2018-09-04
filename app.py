@@ -58,6 +58,10 @@ def index():
         del ds_code
         del start_date
         del end_date
+        del r
+        del f
+        del df
+
         return redirect('/graph')
 
 @app.route('/graph')
