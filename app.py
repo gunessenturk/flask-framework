@@ -3,6 +3,8 @@ import requests
 import pandas as pd
 import numpy as np
 
+import os
+
 from bokeh.layouts import gridplot
 from bokeh.plotting import figure, show, output_file
 from bokeh.models import ColumnDataSource, LabelSet
@@ -14,6 +16,9 @@ def index():
     if request.method == 'GET':
         return render_template('index.html')
     else:
+        if os.path.exists("templates/stocks.html"):
+            os.remove("templates/stocks.html")
+        
         db_code = "EOD"
         # ds_code = "HD"
         ds_code = request.form['company']
