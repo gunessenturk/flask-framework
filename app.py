@@ -13,6 +13,7 @@ def index():
         start_date = request.form['start_date']
         end_date = request.form['end_date']
         url = 'https://www.quandl.com/api/v3/datasets/'+db_code+'/'+ds_code+'?column_index=4&start_date='+start_date+'&end_date='+end_date+'&api_key=D75Ftay9wEKd3jtrYJG8'
+        r = requests.get(url)
 
         return redirect('/graph')
 
