@@ -16,8 +16,7 @@ def index():
     if request.method == 'GET':
         return render_template('index.html')
     else:
-        if os.path.exists("templates/stocks.html"):
-            os.remove("templates/stocks.html")
+        
         
         db_code = "EOD"
         # ds_code = "HD"
@@ -49,6 +48,8 @@ def index():
         p1.patches('date', 'price', source=data)
 
         # open a browser
+        if os.path.exists("templates/stocks.html"):
+            os.remove("templates/stocks.html")
         output_file("templates/stocks.html", title="Stock Prices")
         show(gridplot([[p1]], plot_width=400, plot_height=400))
 
