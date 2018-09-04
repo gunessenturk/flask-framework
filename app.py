@@ -23,7 +23,7 @@ def index():
     if request.method == 'GET':
         #if os.path.exists('templates/stock_pr_.*'):
         #   os.remove('templates/stock_pr_.*')
-        purge('templates','stock_pr_.*')
+        #purge('templates','stock_pr_.*')
         return render_template('index.html')
     else:
         
