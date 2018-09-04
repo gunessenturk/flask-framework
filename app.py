@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect
 import requests
+import pandas as pd
+import numpy as np
 
 app = Flask(__name__)
 
@@ -16,6 +18,11 @@ def index():
         r = requests.get(url)
         f = r.json()
         df = pd.DataFrame.from_dict(f)
+        dataset = df.loc['data']
+
+        file = open('output.txt', 'w')
+        file.write('%s\n\n' % (f))
+        file.close()
 
         return redirect('/graph')
 
