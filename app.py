@@ -55,6 +55,9 @@ def index():
         output_file("templates/stocks.html", title="Stock Prices")
         show(gridplot([[p1]], plot_width=400, plot_height=400))
 
+        del ds_code
+        del start_date
+        del end_date
         return redirect('/graph')
 
 @app.route('/graph')
