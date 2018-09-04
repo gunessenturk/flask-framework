@@ -29,10 +29,6 @@ def index():
         df = pd.DataFrame({'date':date, 'closing':closing_price})
         df['date'] = pd.to_datetime(df['date'])
 
-        file = open('output.txt', 'w')
-        file.write('%s\n\n' % (df['date']))
-        file.close()
-
         data=dict( date=df['date'].tolist(), price=df['closing'])
 
         p1 = figure(x_axis_type="datetime", title="Stock Closing Prices")
