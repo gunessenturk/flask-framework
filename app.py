@@ -70,10 +70,10 @@ def index():
         output_file('templates/'+app.graph_file, title='Stock Prices')
         show(gridplot([[p1]], plot_width=400, plot_height=400))
 
-        resp = make_response(redirect('/graph'))
-        resp.cache_control.no_cache = True
-        return resp
-        #return redirect('/graph')
+        #resp = make_response(redirect('/graph'))
+        #resp.cache_control.no_cache = True
+        #return resp
+        return redirect('/graph')
 
 @app.route('/graph')
 def graph():
